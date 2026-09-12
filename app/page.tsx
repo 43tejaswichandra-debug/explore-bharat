@@ -937,6 +937,63 @@ const KOLKATA_TIME_TREK: TimeTrekQuestion[] = [
 ];
 
 /* =========================================================
+   TIME TREK — AHMEDABAD
+========================================================= */
+
+const MUMBAI_TIME_TREK: TimeTrekQuestion[] = [
+  { question: "Which famous landmark is located at Apollo Bunder in Mumbai?", options: ["Gateway of India", "Charminar", "India Gate", "Victoria Memorial"], answer: "Gateway of India", hint1: "Think of Mumbai's famous waterfront monument.", hint2: "Its name contains the word Gateway.", fact: "The Gateway of India is a famous landmark located at Apollo Bunder in Mumbai." },
+  { question: "Mumbai is the capital city of which Indian state?", options: ["Gujarat", "Goa", "Maharashtra", "Karnataka"], answer: "Maharashtra", hint1: "Think of the state on India's western coast.", hint2: "Mumbai is its capital city.", fact: "Mumbai is the capital city of Maharashtra." },
+  { question: "Which festival is especially famous for large public celebrations in Mumbai?", options: ["Baisakhi", "Bihu", "Ganesh Chaturthi", "Onam"], answer: "Ganesh Chaturthi", hint1: "Think of Mumbai's famous public festival.", hint2: "It celebrates Lord Ganesha.", fact: "Ganesh Chaturthi is celebrated on a very large scale in Mumbai." },
+  { question: "Which sea borders Mumbai on its western side?", options: ["Arabian Sea", "Bay of Bengal", "Red Sea", "Andaman Sea"], answer: "Arabian Sea", hint1: "Think of the sea along India's western coast.", hint2: "Mumbai lies beside it.", fact: "Mumbai lies along the Arabian Sea on the western coast of India." },
+  { question: "Which railway station in Mumbai is a UNESCO World Heritage Site?", options: ["Bandra Terminus", "Dadar Station", "Mumbai Central", "Chhatrapati Shivaji Maharaj Terminus"], answer: "Chhatrapati Shivaji Maharaj Terminus", hint1: "Think of Mumbai's famous historic railway station.", hint2: "Its name begins with Chhatrapati Shivaji.", fact: "Chhatrapati Shivaji Maharaj Terminus is a UNESCO World Heritage Site." },
+  { question: "Which of these is a well-known place in Mumbai?", options: ["Elephanta Caves", "Mysore Palace", "Gateway of India", "Marine Drive"], answer: "Gateway of India", hint1: "Think of Mumbai's famous waterfront landmarks.", hint2: "It stands at Apollo Bunder.", fact: "Elephanta Caves, Gateway of India and Marine Drive are well-known places in Mumbai." },
+  { question: "Mumbai was formerly known as Bombay.", options: ["True", "False"], answer: "True", hint1: "Think of Mumbai's former English name.", hint2: "The older name was widely used before 1995.", fact: "Mumbai was officially renamed from Bombay to Mumbai in 1995." },
+  { question: "The Gateway of India was built in Mumbai to commemorate the visit of King George V and Queen Mary in 1911.", options: ["True", "False"], answer: "True", hint1: "Think of the royal visit connected with the monument.", hint2: "The visit took place in 1911.", fact: "The Gateway of India was built to commemorate the visit of King George V and Queen Mary to India." },
+  { question: "Which language is the official language of Maharashtra and is widely spoken in Mumbai?", options: ["Marathi", "Bengali", "Punjabi", "Tamil"], answer: "Marathi", hint1: "Think of Maharashtra's official language.", hint2: "Its name is also the name of the state's regional language.", fact: "Marathi is the official language of Maharashtra and is widely spoken in Mumbai." },
+  { question: "Which nickname is commonly associated with Mumbai because of its major role in India's Hindi film industry?", options: ["Bollywood", "Kollywood", "Sandalwood", "Tollywood"], answer: "Bollywood", hint1: "Think of India's Hindi film industry.", hint2: "The nickname begins with B.", fact: "Mumbai is commonly associated with Bollywood, India's Hindi-language film industry." },
+];
+
+const MUMBAI_WORD_PUZZLE = [
+  { question: "What is Mumbai famous for in the film industry?", answer: "BOLLYWOOD", hint: "HINDI FILM INDUSTRY" },
+] as const;
+
+const MUMBAI_WORD_GRID_SIZE = 12;
+
+function createMumbaiWordGrid(): { grid: WordPuzzleCell[][]; placements: WordPlacement[] } {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const word = MUMBAI_WORD_PUZZLE[0].answer;
+  const grid = Array.from({ length: MUMBAI_WORD_GRID_SIZE }, (_, row) => Array.from({ length: MUMBAI_WORD_GRID_SIZE }, (_, col) => ({ row, col, letter: "" })));
+  const row = 5;
+  const startCol = 2;
+  const cells: Array<[number, number]> = [];
+  for (let i = 0; i < word.length; i++) { grid[row][startCol + i].letter = word[i]; cells.push([row, startCol + i]); }
+  for (let r = 0; r < MUMBAI_WORD_GRID_SIZE; r++) for (let c = 0; c < MUMBAI_WORD_GRID_SIZE; c++) if (!grid[r][c].letter) grid[r][c].letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+  return { grid, placements: [{ answer: word, cells }] };
+}
+
+const MUMBAI_CULTURE_QUEST: CultureQuestItem[] = [
+  { id: 1, item: "Gateway of India", connection: "Mumbai waterfront monument" },
+  { id: 2, item: "Marine Drive", connection: "Famous seafront promenade" },
+  { id: 3, item: "CSMT", connection: "UNESCO World Heritage Site" },
+  { id: 4, item: "Ganesh Chaturthi", connection: "Famous Mumbai festival" },
+  { id: 5, item: "Bollywood", connection: "Hindi film industry" },
+  { id: 6, item: "Chhatrapati Shivaji Maharaj", connection: "Maratha ruler" },
+];
+
+const AHMEDABAD_TIME_TREK: TimeTrekQuestion[] = [
+  { question: "Which famous stepwell is located in Ahmedabad and is known for beautiful architecture?", options: ["Adalaj Stepwell", "Rani ki Vav", "Agrasen ki Baoli", "Chand Baori"], answer: "Adalaj Stepwell", hint1: "Think of a historic stepwell near Ahmedabad.", hint2: "Its name begins with Adalaj.", fact: "Adalaj Stepwell is a famous historic stepwell near Ahmedabad, known for its beautiful architecture." },
+  { question: "Which famous monument in Ahmedabad was built by Sultan Ahmed Shah?", options: ["Sidi Saiyyed Mosque", "Jama Masjid", "Bhadra Fort", "Adalaj Stepwell"], answer: "Sidi Saiyyed Mosque", hint1: "Think of Ahmedabad's famous mosque with carved stone screens.", hint2: "Its name begins with Sidi.", fact: "Sidi Saiyyed Mosque is a famous historic mosque in Ahmedabad, known for its intricate stone jali work." },
+  { question: "Ahmedabad is located on banks of which river?", options: ["Narmada", "Sabarmati", "Tapi", "Mahi"], answer: "Sabarmati", hint1: "Think of the river flowing through Ahmedabad.", hint2: "Its name begins with S.", fact: "The Sabarmati River flows through Ahmedabad and is closely associated with the city's history." },
+  { question: "Which famous place in Ahmedabad is associated with Mahatma Gandhi?", options: ["Sabarmati Ashram", "Gandhi Smriti", "Mani Bhavan", "Sardar Patel Museum"], answer: "Sabarmati Ashram", hint1: "Think of Gandhi's historic home and centre in Ahmedabad.", hint2: "It shares its name with Ahmedabad's river.", fact: "Sabarmati Ashram in Ahmedabad is strongly associated with Mahatma Gandhi and India's freedom movement." },
+  { question: "Which Gujarati snack is extremely popular in Ahmedabad?", options: ["Dhokla", "Kachori", "Litti Chokha", "Petha"], answer: "Dhokla", hint1: "Think of a famous steamed Gujarati snack.", hint2: "Its name begins with D.", fact: "Dhokla is a popular Gujarati snack and is widely enjoyed in Ahmedabad." },
+  { question: "Which festival is Ahmedabad particularly famous for grand Garba celebrations?", options: ["Diwali", "Navratri", "Holi", "Makar Sankranti"], answer: "Navratri", hint1: "Think of the festival famous for Garba and Dandiya.", hint2: "It is celebrated for nine nights.", fact: "Ahmedabad is particularly famous for grand Garba celebrations during Navratri." },
+  { question: "Who founded Ahmedabad in 1411?", options: ["Sultan Ahmed Shah", "Mahmud Begada", "Sardar Vallabhbhai Patel", "Maharana Pratap"], answer: "Sultan Ahmed Shah", hint1: "Think of the ruler whose name is part of Ahmedabad.", hint2: "The city was named after him.", fact: "Sultan Ahmed Shah founded Ahmedabad in 1411." },
+  { question: "Which mosque famous for intricately carved “Tree of Life” jali?", options: ["Jama Masjid", "Sidi Saiyyed Mosque", "Sarkhej Roza", "Rani Sipri Mosque"], answer: "Sidi Saiyyed Mosque", hint1: "Think of Ahmedabad's famous carved stone screen.", hint2: "It is known for the Tree of Life jali.", fact: "Sidi Saiyyed Mosque is famous for its intricately carved stone jali, especially the celebrated Tree of Life design." },
+  { question: "Which museum in Ahmedabad is famous for collection of kites?", options: ["Calico Museum", "Kite Museum", "Sanskar Kendra", "Lalbhai Dalpatbhai Museum"], answer: "Kite Museum", hint1: "Think of a museum dedicated to a colourful flying tradition.", hint2: "Its name includes the object that flies in the sky.", fact: "The Kite Museum in Ahmedabad is known for its collection of kites." },
+  { question: "Which traditional Gujarati dish commonly enjoyed in Gujarati thali?", options: ["Dal Baati Churma", "Undhiyu", "Pongal", "Chole Bhature"], answer: "Undhiyu", hint1: "Think of a traditional mixed-vegetable Gujarati dish.", hint2: "It is a well-known Gujarati thali dish.", fact: "Undhiyu is a traditional Gujarati dish commonly enjoyed as part of a Gujarati thali." },
+];
+
+/* =========================================================
    PIECE OF THE PAST — HYDERABAD
 ========================================================= */
 
@@ -1446,6 +1503,84 @@ const PURI_CULTURE_QUEST: CultureQuestItem[] = [
   { id: 6, item: "Jagannath, Balabhadra and Subhadra", connection: "Three principal deities worshipped at Jagannath Temple" },
 ];
 
+
+const AHMEDABAD_CULTURE_QUEST: CultureQuestItem[] = [
+  { id: 1, item: "Sabarmati Ashram", connection: "Associated with Mahatma Gandhi" },
+  { id: 2, item: "Sidi Saiyyed Mosque", connection: "Famous for its intricate stone jali" },
+  { id: 3, item: "Adalaj Stepwell", connection: "Famous historic stepwell near Ahmedabad" },
+  { id: 4, item: "Sabarmati River", connection: "River flowing through Ahmedabad" },
+  { id: 5, item: "Dhokla", connection: "Famous Gujarati snack" },
+  { id: 6, item: "Kankaria Lake", connection: "Popular tourist and recreational spot" },
+  { id: 7, item: "Sultan Ahmed Shah", connection: "Founder of Ahmedabad" },
+  { id: 8, item: "Navratri", connection: "Festival famous for Garba and Dandiya" },
+  { id: 9, item: "Sardar Vallabhbhai Patel", connection: "Famous Indian freedom fighter and leader" },
+  { id: 10, item: "Undhiyu", connection: "Traditional Gujarati dish" },
+];
+
+const AHMEDABAD_WORD_PUZZLE = [
+  { question: "I am a famous festival celebrated in Ahmedabad. I'm dedicated to the worship of Goddess Durga.", answer: "NAVRATRI", hint: "FESTIVAL OF NINE NIGHTS" },
+] as const;
+
+const AHMEDABAD_WORD_GRID_SIZE = 12;
+
+function createAhmedabadWordGrid(): { grid: WordPuzzleCell[][]; placements: WordPlacement[] } {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const word = AHMEDABAD_WORD_PUZZLE[0].answer;
+  const grid = Array.from({ length: AHMEDABAD_WORD_GRID_SIZE }, (_, row) => Array.from({ length: AHMEDABAD_WORD_GRID_SIZE }, (_, col) => ({ row, col, letter: "" })));
+  const row = 5;
+  const startCol = 2;
+  const cells: Array<[number, number]> = [];
+  for (let i = 0; i < word.length; i++) { grid[row][startCol + i].letter = word[i]; cells.push([row, startCol + i]); }
+  for (let r = 0; r < AHMEDABAD_WORD_GRID_SIZE; r++) for (let c = 0; c < AHMEDABAD_WORD_GRID_SIZE; c++) if (!grid[r][c].letter) grid[r][c].letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+  return { grid, placements: [{ answer: word, cells }] };
+}
+
+
+/* =========================================================
+   TIME TREK — AURANGABAD
+========================================================= */
+
+const AURANGABAD_TIME_TREK: TimeTrekQuestion[] = [
+  { question: "Which famous monument in Aurangabad is often called the Mini Taj Mahal?", options: ["Bibi Ka Maqbara", "Daulatabad Fort", "Panchakki", "Ellora Caves"], answer: "Bibi Ka Maqbara", hint1: "Think of a monument inspired by the Taj Mahal.", hint2: "Its name begins with Bibi.", fact: "Bibi Ka Maqbara is a famous monument in Aurangabad and is often called the Mini Taj Mahal." },
+  { question: "Which ancient caves near Aurangabad are famous for Buddhist paintings and sculptures?", options: ["Ajanta Caves", "Elephanta Caves", "Udayagiri Caves", "Khandagiri Caves"], answer: "Ajanta Caves", hint1: "Think of the caves known for ancient Buddhist art.", hint2: "Their name begins with Ajanta.", fact: "The Ajanta Caves are famous for their ancient Buddhist paintings, sculptures and rock-cut architecture." },
+  { question: "Which caves near Aurangabad contain Buddhist, Hindu and Jain monuments?", options: ["Ellora Caves", "Ajanta Caves", "Elephanta Caves", "Badami Caves"], answer: "Ellora Caves", hint1: "Think of caves representing three major religious traditions.", hint2: "Their name begins with Ellora.", fact: "The Ellora Caves contain remarkable Buddhist, Hindu and Jain rock-cut monuments." },
+  { question: "Which historic fort near Aurangabad is known for its strong defensive position and grand architecture?", options: ["Daulatabad Fort", "Red Fort", "Golconda Fort", "Agra Fort"], answer: "Daulatabad Fort", hint1: "Think of the famous fort near Aurangabad.", hint2: "It is also known as Devagiri.", fact: "Daulatabad Fort, also known as Devagiri, is a famous historic fort near Aurangabad." },
+  { question: "Which famous water mill in Aurangabad uses water to power its grinding mechanism?", options: ["Panchakki", "Jantar Mantar", "Golghar", "Adalaj Stepwell"], answer: "Panchakki", hint1: "Think of Aurangabad's famous water-powered structure.", hint2: "Its name means water mill.", fact: "Panchakki is a historic water mill in Aurangabad known for its water-powered mechanism." },
+  { question: "Which Mughal emperor is closely associated with Aurangabad?", options: ["Aurangzeb", "Akbar", "Shah Jahan", "Humayun"], answer: "Aurangzeb", hint1: "Think of the Mughal emperor whose name is linked with the city.", hint2: "The city was an important centre during his Deccan campaigns.", fact: "Aurangzeb was closely associated with Aurangabad, which served as an important Mughal centre in the Deccan." },
+  { question: "Which traditional dish is especially associated with Aurangabad's local cuisine?", options: ["Naan Qalia", "Dhokla", "Petha", "Mysore Pak"], answer: "Naan Qalia", hint1: "Think of a famous local meat dish.", hint2: "Its name has two words.", fact: "Naan Qalia is a traditional meat dish associated with Aurangabad." },
+  { question: "Which traditional handwoven textile is famous in Maharashtra and is associated with the region around Aurangabad?", options: ["Paithani", "Banarasi Silk", "Kanjeevaram Silk", "Phulkari"], answer: "Paithani", hint1: "Think of Maharashtra's famous handwoven textile.", hint2: "It is known for rich colours and traditional designs.", fact: "Paithani is a traditional handwoven textile from Maharashtra, known for its rich colours and distinctive designs." },
+];
+
+const AURANGABAD_WORD_PUZZLE = [
+  { question: "I'm a group of ancient rock-cut caves and a UNESCO World Heritage Site.", answer: "AJANTACAVES", hint: "ANCIENT BUDDHIST ROCK-CUT CAVES" },
+] as const;
+
+const AURANGABAD_WORD_GRID_SIZE = 12;
+
+function createAurangabadWordGrid(): { grid: WordPuzzleCell[][]; placements: WordPlacement[] } {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const word = AURANGABAD_WORD_PUZZLE[0].answer;
+  const grid = Array.from({ length: AURANGABAD_WORD_GRID_SIZE }, (_, row) => Array.from({ length: AURANGABAD_WORD_GRID_SIZE }, (_, col) => ({ row, col, letter: "" })));
+  const row = 5;
+  const startCol = 1;
+  const cells: Array<[number, number]> = [];
+  for (let i = 0; i < word.length; i++) { grid[row][startCol + i].letter = word[i]; cells.push([row, startCol + i]); }
+  for (let r = 0; r < AURANGABAD_WORD_GRID_SIZE; r++) for (let c = 0; c < AURANGABAD_WORD_GRID_SIZE; c++) if (!grid[r][c].letter) grid[r][c].letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+  return { grid, placements: [{ answer: word, cells }] };
+}
+
+const AURANGABAD_CULTURE_QUEST: CultureQuestItem[] = [
+  { id: 1, item: "Bibi Ka Maqbara", connection: "Famous monument known as the Mini Taj Mahal" },
+  { id: 2, item: "Ajanta Caves", connection: "Famous Buddhist rock-cut caves" },
+  { id: 3, item: "Ellora Caves", connection: "Rock-cut caves with Buddhist, Hindu and Jain monuments" },
+  { id: 4, item: "Daulatabad Fort", connection: "Historic fort near Aurangabad" },
+  { id: 5, item: "Panchakki", connection: "Famous water mill" },
+  { id: 6, item: "Aurangzeb", connection: "Mughal emperor associated with Aurangabad" },
+  { id: 7, item: "Naan Qalia", connection: "Famous local meat dish" },
+  { id: 8, item: "Paithani", connection: "Traditional handwoven textile" },
+  { id: 9, item: "Chhatrapati Sambhajinagar", connection: "New official name of Aurangabad" },
+  { id: 10, item: "Ghrishneshwar Temple", connection: "One of the twelve Jyotirlingas" },
+];
 
 /* =========================================================
    HERITAGE MAZE DATA
@@ -1976,6 +2111,9 @@ export default function Home() {
   const [patnaTimeTrekComplete, setPatnaTimeTrekComplete] = useState(false);
   const [puriTimeTrekComplete, setPuriTimeTrekComplete] = useState(false);
   const [bhubaneswarTimeTrekComplete, setBhubaneswarTimeTrekComplete] = useState(false);
+  const [ahmedabadTimeTrekComplete, setAhmedabadTimeTrekComplete] = useState(false);
+  const [mumbaiTimeTrekComplete, setMumbaiTimeTrekComplete] = useState(false);
+  const [aurangabadTimeTrekComplete, setAurangabadTimeTrekComplete] = useState(false);
 
   const resetTimeTrek = () => {
     setTimeTrekQuestion(0);
@@ -2058,6 +2196,12 @@ export default function Home() {
     nextScreen("timeTrek");
   };
 
+  const openAhmedabadTimeTrek = () => { setSelectedPlace("Ahmedabad"); resetTimeTrek(); nextScreen("timeTrek"); };
+
+  const openMumbaiTimeTrek = () => { setSelectedPlace("Mumbai"); resetTimeTrek(); nextScreen("timeTrek"); };
+
+  const openAurangabadTimeTrek = () => { setSelectedPlace("Aurangabad"); resetTimeTrek(); nextScreen("timeTrek"); };
+
   const currentTimeTrekData =
     selectedPlace === "Chennai"
       ? CHENNAI_TIME_TREK
@@ -2081,7 +2225,13 @@ export default function Home() {
                         ? PURI_TIME_TREK
                         : selectedPlace === "Bhubaneswar"
                           ? BHUBANESWAR_TIME_TREK
-                          : HYDERABAD_TIME_TREK;
+                          : selectedPlace === "Ahmedabad"
+                            ? AHMEDABAD_TIME_TREK
+                            : selectedPlace === "Mumbai"
+                              ? MUMBAI_TIME_TREK
+                              : selectedPlace === "Aurangabad"
+                                ? AURANGABAD_TIME_TREK
+                                : HYDERABAD_TIME_TREK;
 
   const handleTimeTrekAnswer = (option: string) => {
     if (timeTrekAnswered || timeTrekComplete) return;
@@ -2123,6 +2273,12 @@ export default function Home() {
         setPuriTimeTrekComplete(true);
       } else if (selectedPlace === "Bhubaneswar") {
         setBhubaneswarTimeTrekComplete(true);
+      } else if (selectedPlace === "Ahmedabad") {
+        setAhmedabadTimeTrekComplete(true);
+      } else if (selectedPlace === "Mumbai") {
+        setMumbaiTimeTrekComplete(true);
+      } else if (selectedPlace === "Aurangabad") {
+        setAurangabadTimeTrekComplete(true);
       }
       return;
     }
@@ -2188,6 +2344,37 @@ export default function Home() {
   const [bhubaneswarSelection, setBhubaneswarSelection] = useState<Array<[number, number]>>([]);
   const [bhubaneswarSelecting, setBhubaneswarSelecting] = useState(false);
   const [bhubaneswarPuzzleComplete, setBhubaneswarPuzzleComplete] = useState(false);
+  const [ahmedabadWordGrid, setAhmedabadWordGrid] = useState<WordPuzzleCell[][]>([]);
+  const [ahmedabadWordPlacements, setAhmedabadWordPlacements] = useState<WordPlacement[]>([]);
+  const [ahmedabadWordQuestion, setAhmedabadWordQuestion] = useState(0);
+  const [ahmedabadFoundWords, setAhmedabadFoundWords] = useState<number[]>([]);
+  const [ahmedabadCursor, setAhmedabadCursor] = useState<[number, number]>([0, 0]);
+  const [ahmedabadSelectionStart, setAhmedabadSelectionStart] = useState<[number, number] | null>(null);
+  const [ahmedabadSelection, setAhmedabadSelection] = useState<Array<[number, number]>>([]);
+  const [ahmedabadSelecting, setAhmedabadSelecting] = useState(false);
+  const [ahmedabadPuzzleComplete, setAhmedabadPuzzleComplete] = useState(false);
+  const [ahmedabadHint, setAhmedabadHint] = useState(0);
+  const [mumbaiWordGrid, setMumbaiWordGrid] = useState<WordPuzzleCell[][]>([]);
+  const [mumbaiWordPlacements, setMumbaiWordPlacements] = useState<WordPlacement[]>([]);
+  const [mumbaiWordQuestion, setMumbaiWordQuestion] = useState(0);
+  const [mumbaiFoundWords, setMumbaiFoundWords] = useState<number[]>([]);
+  const [mumbaiCursor, setMumbaiCursor] = useState<[number, number]>([0, 0]);
+  const [mumbaiSelectionStart, setMumbaiSelectionStart] = useState<[number, number] | null>(null);
+  const [mumbaiSelection, setMumbaiSelection] = useState<Array<[number, number]>>([]);
+  const [mumbaiSelecting, setMumbaiSelecting] = useState(false);
+  const [mumbaiPuzzleComplete, setMumbaiPuzzleComplete] = useState(false);
+  const [mumbaiHint, setMumbaiHint] = useState(0);
+  const [aurangabadWordGrid, setAurangabadWordGrid] = useState<WordPuzzleCell[][]>([]);
+  const [aurangabadWordPlacements, setAurangabadWordPlacements] = useState<WordPlacement[]>([]);
+  const [aurangabadWordQuestion, setAurangabadWordQuestion] = useState(0);
+  const [aurangabadFoundWords, setAurangabadFoundWords] = useState<number[]>([]);
+  const [aurangabadCursor, setAurangabadCursor] = useState<[number, number]>([0, 0]);
+  const [aurangabadSelectionStart, setAurangabadSelectionStart] = useState<[number, number] | null>(null);
+  const [aurangabadSelection, setAurangabadSelection] = useState<Array<[number, number]>>([]);
+  const [aurangabadSelecting, setAurangabadSelecting] = useState(false);
+  const [aurangabadPuzzleComplete, setAurangabadPuzzleComplete] = useState(false);
+  const [aurangabadHint, setAurangabadHint] = useState(0);
+
   const [bhubaneswarHint, setBhubaneswarHint] = useState(0);
   const [patnaHint, setPatnaHint] = useState(0);
   const [kolkataHint, setKolkataHint] = useState(0);
@@ -2309,6 +2496,54 @@ export default function Home() {
     nextScreen("pieceOfPast");
   };
 
+  const openAhmedabadPieceOfPast = () => {
+    const generated = createAhmedabadWordGrid();
+    setSelectedPlace("Ahmedabad");
+    setAhmedabadWordGrid(generated.grid);
+    setAhmedabadWordPlacements(generated.placements);
+    setAhmedabadWordQuestion(0);
+    setAhmedabadFoundWords([]);
+    setAhmedabadCursor([0, 0]);
+    setAhmedabadSelectionStart(null);
+    setAhmedabadSelection([]);
+    setAhmedabadSelecting(false);
+    setAhmedabadPuzzleComplete(false);
+    setAhmedabadHint(0);
+    nextScreen("pieceOfPast");
+  };
+
+  const openMumbaiPieceOfPast = () => {
+    const generated = createMumbaiWordGrid();
+    setSelectedPlace("Mumbai");
+    setMumbaiWordGrid(generated.grid);
+    setMumbaiWordPlacements(generated.placements);
+    setMumbaiWordQuestion(0);
+    setMumbaiFoundWords([]);
+    setMumbaiCursor([0, 0]);
+    setMumbaiSelectionStart(null);
+    setMumbaiSelection([]);
+    setMumbaiSelecting(false);
+    setMumbaiPuzzleComplete(false);
+    setMumbaiHint(0);
+    nextScreen("pieceOfPast");
+  };
+
+  const openAurangabadPieceOfPast = () => {
+    const generated = createAurangabadWordGrid();
+    setSelectedPlace("Aurangabad");
+    setAurangabadWordGrid(generated.grid);
+    setAurangabadWordPlacements(generated.placements);
+    setAurangabadWordQuestion(0);
+    setAurangabadFoundWords([]);
+    setAurangabadCursor([0, 0]);
+    setAurangabadSelectionStart(null);
+    setAurangabadSelection([]);
+    setAurangabadSelecting(false);
+    setAurangabadPuzzleComplete(false);
+    setAurangabadHint(0);
+    nextScreen("pieceOfPast");
+  };
+
   const openKolkataPieceOfPast = () => {
     const generated = createKolkataWordGrid();
     setSelectedPlace("Kolkata");
@@ -2394,6 +2629,9 @@ export default function Home() {
   const [patnaCultureComplete, setPatnaCultureComplete] = useState(false);
   const [puriCultureComplete, setPuriCultureComplete] = useState(false);
   const [bhubaneswarCultureComplete, setBhubaneswarCultureComplete] = useState(false);
+  const [ahmedabadCultureComplete, setAhmedabadCultureComplete] = useState(false);
+  const [mumbaiCultureComplete, setMumbaiCultureComplete] = useState(false);
+  const [aurangabadCultureComplete, setAurangabadCultureComplete] = useState(false);
 
   const currentCultureData =
     selectedPlace === "Chennai"
@@ -2418,7 +2656,13 @@ export default function Home() {
                         ? PURI_CULTURE_QUEST
                         : selectedPlace === "Bhubaneswar"
                           ? BHUBANESWAR_CULTURE_QUEST
-                          : HYDERABAD_CULTURE_QUEST;
+                          : selectedPlace === "Ahmedabad"
+                            ? AHMEDABAD_CULTURE_QUEST
+                            : selectedPlace === "Mumbai"
+                              ? MUMBAI_CULTURE_QUEST
+                              : selectedPlace === "Aurangabad"
+                                ? AURANGABAD_CULTURE_QUEST
+                                : HYDERABAD_CULTURE_QUEST;
 
   const resetCultureQuest = (place = selectedPlace) => {
     setCultureDraggedId(null);
@@ -2447,7 +2691,13 @@ export default function Home() {
                           ? PURI_CULTURE_QUEST
                           : place === "Bhubaneswar"
                             ? BHUBANESWAR_CULTURE_QUEST
-                            : HYDERABAD_CULTURE_QUEST;
+                            : place === "Ahmedabad"
+                              ? AHMEDABAD_CULTURE_QUEST
+                              : place === "Mumbai"
+                                ? MUMBAI_CULTURE_QUEST
+                                : place === "Aurangabad"
+                                  ? AURANGABAD_CULTURE_QUEST
+                                  : HYDERABAD_CULTURE_QUEST;
     setCultureConnectionOrder(
       [...data.map((entry) => entry.id)].sort(
         () => Math.random() - 0.5
@@ -2505,9 +2755,26 @@ export default function Home() {
     nextScreen("cultureQuest");
   };
 
+  const openAhmedabadCultureQuest = () => { setSelectedPlace("Ahmedabad"); resetCultureQuest("Ahmedabad"); nextScreen("cultureQuest"); };
+
   const openKolkataCultureQuest = () => {
     setSelectedPlace("Kolkata");
     resetCultureQuest("Kolkata");
+    nextScreen("cultureQuest");
+  };
+
+  const openMumbaiCultureQuest = () => {
+    setSelectedPlace("Mumbai");
+    resetCultureQuest("Mumbai");
+    setCultureSubmitted(false);
+    setCultureMatched([]);
+    setCultureWrongDrops({});
+    nextScreen("cultureQuest");
+  };
+
+  const openAurangabadCultureQuest = () => {
+    setSelectedPlace("Aurangabad");
+    resetCultureQuest("Aurangabad");
     nextScreen("cultureQuest");
   };
 
@@ -2620,6 +2887,14 @@ export default function Home() {
       setPatnaCultureComplete(true);
     } else if (selectedPlace === "Puri" && cultureMatched.length === PURI_CULTURE_QUEST.length) {
       setPuriCultureComplete(true);
+    } else if (selectedPlace === "Bhubaneswar" && cultureMatched.length === BHUBANESWAR_CULTURE_QUEST.length) {
+      setBhubaneswarCultureComplete(true);
+    } else if (selectedPlace === "Ahmedabad" && cultureMatched.length === AHMEDABAD_CULTURE_QUEST.length) {
+      setAhmedabadCultureComplete(true);
+    } else if (selectedPlace === "Mumbai" && cultureMatched.length === MUMBAI_CULTURE_QUEST.length) {
+      setMumbaiCultureComplete(true);
+    } else if (selectedPlace === "Aurangabad" && cultureMatched.length === AURANGABAD_CULTURE_QUEST.length) {
+      setAurangabadCultureComplete(true);
     }
   };
 
@@ -2885,6 +3160,9 @@ export default function Home() {
     if (place === "Patna") return PATNA_TIME_TREK.length * 5;
     if (place === "Puri") return PURI_TIME_TREK.length * 5;
     if (place === "Bhubaneswar") return BHUBANESWAR_TIME_TREK.length * 5;
+    if (place === "Ahmedabad") return AHMEDABAD_TIME_TREK.length * 5;
+    if (place === "Mumbai") return MUMBAI_TIME_TREK.length * 5;
+    if (place === "Aurangabad") return AURANGABAD_TIME_TREK.length * 5;
     return 0;
   };
 
@@ -2901,11 +3179,14 @@ export default function Home() {
     if (place === "Patna") return PATNA_CULTURE_QUEST.length * 5;
     if (place === "Puri") return PURI_CULTURE_QUEST.length * 5;
     if (place === "Bhubaneswar") return BHUBANESWAR_CULTURE_QUEST.length * 5;
+    if (place === "Ahmedabad") return AHMEDABAD_CULTURE_QUEST.length * 5;
+    if (place === "Mumbai") return MUMBAI_CULTURE_QUEST.length * 5;
+    if (place === "Aurangabad") return AURANGABAD_CULTURE_QUEST.length * 5;
     return 0;
   };
 
   const getPuzzleMaximum = (place: string) =>
-    place === "Kolkata" || place === "Patna" || place === "Puri" || place === "Bhubaneswar" ? 5 : ["Hyderabad", "Chennai", "Thanjavur", "Mysuru", "Jaipur", "Amritsar", "Delhi", "Agra"].includes(place) ? 5 : 0;
+    ["Kolkata", "Patna", "Puri", "Bhubaneswar", "Ahmedabad", "Mumbai", "Aurangabad", "Hyderabad", "Chennai", "Thanjavur", "Mysuru", "Jaipur", "Amritsar", "Delhi", "Agra"].includes(place) ? 5 : 0;
 
   const profilePlaceRows = Object.entries(PROFILE_REGIONS).flatMap(
     ([region, places]) => places.map((place) => ({ region, place }))
@@ -3627,6 +3908,12 @@ export default function Home() {
                     openPuriTimeTrek();
                   } else if (selectedPlace === "Bhubaneswar") {
                     openBhubaneswarTimeTrek();
+                  } else if (selectedPlace === "Ahmedabad") {
+                    openAhmedabadTimeTrek();
+                  } else if (selectedPlace === "Mumbai") {
+                    openMumbaiTimeTrek();
+                  } else if (selectedPlace === "Aurangabad") {
+                    openAurangabadTimeTrek();
                   }
                 }}
               >
@@ -3684,6 +3971,12 @@ export default function Home() {
                     openPuriPieceOfPast();
                   } else if (selectedPlace === "Bhubaneswar") {
                     openBhubaneswarPieceOfPast();
+                  } else if (selectedPlace === "Ahmedabad") {
+                    openAhmedabadPieceOfPast();
+                  } else if (selectedPlace === "Mumbai") {
+                    openMumbaiPieceOfPast();
+                  } else if (selectedPlace === "Aurangabad") {
+                    openAurangabadPieceOfPast();
                   }
                 }}
               >
@@ -3739,6 +4032,12 @@ export default function Home() {
                     openPuriCultureQuest();
                   } else if (selectedPlace === "Bhubaneswar") {
                     openBhubaneswarCultureQuest();
+                  } else if (selectedPlace === "Ahmedabad") {
+                    openAhmedabadCultureQuest();
+                  } else if (selectedPlace === "Mumbai") {
+                    openMumbaiCultureQuest();
+                  } else if (selectedPlace === "Aurangabad") {
+                    openAurangabadCultureQuest();
                   }
                 }}
               >
@@ -4330,7 +4629,207 @@ export default function Home() {
       {screen === "pieceOfPast" && (
         <section className="screen parchment-screen">
           <div className="scroll region-scroll">
-            {selectedPlace === "Bhubaneswar" ? (
+            {selectedPlace === "Mumbai" ? (
+              !mumbaiPuzzleComplete ? (
+                <div style={{ width: "100%", maxWidth: 1180, margin: "0 auto", padding: "18px 12px 45px", color: "#5a3525", boxSizing: "border-box" }}>
+                  <div className="profile-top"><button className="profile-button" onClick={() => nextScreen("activities")}>← BACK</button></div>
+                  <p className="welcome-small">✦ PIECE OF THE PAST ✦</p>
+                  <h2 style={{ textAlign: "center", fontFamily: "Georgia, 'Times New Roman', serif" }}>🧩 Mumbai Word Hunt</h2>
+                  <p style={{ textAlign: "center", fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700 }}>Find the hidden festival word from Mumbai.</p>
+                  <div style={{ width: "min(100%, 620px)", margin: "18px auto", padding: "16px 18px", borderRadius: 16, background: "rgba(255,248,225,0.94)", border: "1px solid rgba(90,60,35,0.2)", fontFamily: "Georgia, 'Times New Roman', serif", boxSizing: "border-box" }}>
+                    <strong>🧭 HOW TO PLAY</strong>
+                    <div style={{ marginTop: 8, lineHeight: 1.65, fontSize: 14 }}>
+                      🔎 Read the question and find its answer in the grid.<br />
+                      🎯 Words can go across, down, or diagonally — forwards or backwards.<br />
+                      ⌨️ W = Up &nbsp; A = Left &nbsp; S = Down &nbsp; D = Right<br />
+                      ✨ Press SPACE on the first letter, move across the word, then press SPACE again.<br />
+                      💡 Use the hint if you need help.<br />
+                      🏆 Find the hidden word to complete the challenge.
+                    </div>
+                  </div>
+                  <div style={{ width: "min(100%, 620px)", margin: "0 auto 14px", padding: "16px 18px", borderRadius: 16, background: "rgba(255,248,225,0.94)", border: "1px solid rgba(90,60,35,0.2)", fontFamily: "Georgia, 'Times New Roman', serif", textAlign: "center", boxSizing: "border-box" }}>
+                    <div style={{ fontWeight: 800, marginBottom: 7 }}>Question {mumbaiWordQuestion + 1} of {MUMBAI_WORD_PUZZLE.length}</div>
+                    <div style={{ lineHeight: 1.5 }}>{MUMBAI_WORD_PUZZLE[mumbaiWordQuestion].question}</div>
+                    {mumbaiHint > 0 && <div style={{ marginTop: 10, fontWeight: 800 }}>💡 Hint: {MUMBAI_WORD_PUZZLE[mumbaiWordQuestion].hint}</div>}
+                    <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
+                      <button onClick={() => setMumbaiHint(1)} disabled={mumbaiHint >= 1} style={{ border: "none", borderRadius: 10, padding: "9px 14px", background: "#8b633d", color: "#fff8e1", fontWeight: 700, cursor: mumbaiHint >= 1 ? "not-allowed" : "pointer", opacity: mumbaiHint >= 1 ? 0.55 : 1 }}>💡 Hint</button>
+                      <span style={{ padding: "9px 12px", borderRadius: 10, background: "rgba(123,75,53,0.1)", fontWeight: 700 }}>Found: {mumbaiFoundWords.length} / 1</span>
+                    </div>
+                  </div>
+                  <div tabIndex={0} autoFocus onKeyDown={(event) => {
+                    if (!mumbaiWordGrid.length || mumbaiPuzzleComplete) return;
+                    const key = event.key.toLowerCase();
+                    if (!["w", "a", "s", "d", " ", "spacebar"].includes(key)) return;
+                    event.preventDefault();
+                    let [r, c] = mumbaiCursor;
+                    if (key === "w") r = Math.max(0, r - 1);
+                    if (key === "s") r = Math.min(AHMEDABAD_WORD_GRID_SIZE - 1, r + 1);
+                    if (key === "a") c = Math.max(0, c - 1);
+                    if (key === "d") c = Math.min(AHMEDABAD_WORD_GRID_SIZE - 1, c + 1);
+                    if (key === " ") {
+                      if (!mumbaiSelecting) {
+                        setMumbaiSelectionStart([r, c]); setMumbaiSelection([[r, c]]); setMumbaiSelecting(true);
+                      } else {
+                        const placementIndex = mumbaiWordPlacements.findIndex((placement, index) => {
+                          if (mumbaiFoundWords.includes(index)) return false;
+                          return placement.cells.length === mumbaiSelection.length && placement.cells.every(([pr, pc], i) => pr === mumbaiSelection[i][0] && pc === mumbaiSelection[i][1]);
+                        });
+                        if (placementIndex >= 0) {
+                          const nextFound = [...mumbaiFoundWords, placementIndex];
+                          setMumbaiFoundWords(nextFound); setMumbaiSelectionStart(null); setMumbaiSelection([]); setMumbaiSelecting(false); setMumbaiHint(0);
+                          if (nextFound.length === MUMBAI_WORD_PUZZLE.length) {
+                            setMumbaiPuzzleComplete(true); awardJourneyXP("Mumbai", "pieceOfPast", 5, 5);
+                          } else setMumbaiWordQuestion((q) => q + 1);
+                        } else {
+                          setMumbaiSelectionStart(null); setMumbaiSelection([]); setMumbaiSelecting(false);
+                        }
+                      }
+                      return;
+                    }
+                    setMumbaiCursor([r, c]);
+                    if (mumbaiSelecting && mumbaiSelectionStart) {
+                      const [sr, sc] = mumbaiSelectionStart;
+                      const dr = Math.sign(r - sr);
+                      const dc = Math.sign(c - sc);
+                      const straight = (r === sr || c === sc || Math.abs(r - sr) === Math.abs(c - sc));
+                      if (straight) {
+                        const steps = Math.max(Math.abs(r - sr), Math.abs(c - sc));
+                        const path = Array.from({ length: steps + 1 }, (_, i) => [sr + dr * i, sc + dc * i] as [number, number]);
+                        setMumbaiSelection(path);
+                      }
+                    }
+                  }} style={{ outline: "none" }}>
+                    <div style={{ width: "min(560px, 92vw)", maxWidth: 560, margin: "0 auto", padding: 7, borderRadius: 18, background: "#3b281c", boxShadow: "0 14px 35px rgba(70,45,25,0.28)", boxSizing: "border-box" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: `repeat(${AHMEDABAD_WORD_GRID_SIZE}, 1fr)`, gap: 2, background: "#6f5035", padding: 4, borderRadius: 13 }}>
+                        {mumbaiWordGrid.flatMap((row) => row).map((cell) => {
+                          const key = `${cell.row}-${cell.col}`;
+                          const cursor = mumbaiCursor[0] === cell.row && mumbaiCursor[1] === cell.col;
+                          const selected = mumbaiSelection.some(([r, c]) => r === cell.row && c === cell.col);
+                          const found = mumbaiFoundWords.some((index) => mumbaiWordPlacements[index]?.cells.some(([r, c]) => r === cell.row && c === cell.col));
+                          return <div key={key} style={{ aspectRatio: "1 / 1", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 4, background: found ? "#d7b76a" : selected ? "#b98a45" : cursor ? "#ead9aa" : "#fff8e1", color: "#4b2e20", fontWeight: 900, fontSize: "clamp(10px, 2.7vw, 20px)", boxShadow: cursor ? "inset 0 0 0 3px #7b4b35" : "none", userSelect: "none" }}>{cell.letter}</div>;
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ textAlign: "center", marginTop: 14, fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 800, color: "#7b4b35" }}>WASD = Move &nbsp; | &nbsp; SPACE = Start / Finish</div>
+                  <div style={{ textAlign: "center", marginTop: 10, color: "#68482f", fontFamily: "Georgia, 'Times New Roman', serif" }}>🏆 Game XP: {getGameXP("Mumbai", "pieceOfPast")} / 5</div>
+                </div>
+              ) : (
+                <div style={{ maxWidth: 760, margin: "0 auto", padding: "35px 20px 50px", textAlign: "center", color: "#5a3525" }}>
+                  <div style={{ fontSize: 64 }}>🎉</div>
+                  <p className="welcome-small">✦ PIECE OF THE PAST COMPLETE ✦</p>
+                  <h2 style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>Mumbai Word Hunt Complete!</h2>
+                  <p style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700 }}>You found the hidden word from Mumbai! 🎊</p>
+                  <p style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700 }}>🏆 Game XP: {getGameXP("Mumbai", "pieceOfPast")} / 5 &nbsp; • &nbsp; Overall XP: {overallJourneyXP} / {MAX_JOURNEY_XP}</p>
+                  <div style={{ maxWidth: 620, margin: "20px auto", padding: "18px 20px", borderRadius: 16, background: "rgba(255,248,225,0.94)", border: "1px solid rgba(90,60,35,0.2)", textAlign: "left", fontFamily: "Georgia, 'Times New Roman', serif", lineHeight: 1.6 }}>
+                    <strong>✦ Mumbai discoveries</strong>
+                    {MUMBAI_WORD_PUZZLE.map((entry, index) => <p key={`${entry.answer}-${index}`} style={{ margin: "8px 0" }}>✦ {entry.answer}</p>)}
+                  </div>
+                  <button onClick={() => nextScreen("activities")} style={{ border: "none", borderRadius: 12, padding: "12px 22px", background: "#7b4b35", color: "#fff8e1", fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, cursor: "pointer" }}>← BACK TO MUMBAI</button>
+                </div>
+              )
+
+            ) : selectedPlace === "Aurangabad" ? (
+              !aurangabadPuzzleComplete ? (
+                <div style={{ width: "100%", maxWidth: 1180, margin: "0 auto", padding: "18px 12px 45px", color: "#5a3525", boxSizing: "border-box" }}>
+                  <div className="profile-top"><button className="profile-button" onClick={() => nextScreen("activities")}>← BACK</button></div>
+                  <p className="welcome-small">✦ PIECE OF THE PAST ✦</p>
+                  <h2 style={{ textAlign: "center", fontFamily: "Georgia, 'Times New Roman', serif" }}>🧩 Aurangabad Word Hunt</h2>
+                  <p style={{ textAlign: "center", fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700 }}>Find the hidden heritage word from Aurangabad.</p>
+                  <div style={{ width: "min(100%, 620px)", margin: "18px auto", padding: "16px 18px", borderRadius: 16, background: "rgba(255,248,225,0.94)", border: "1px solid rgba(90,60,35,0.2)", fontFamily: "Georgia, 'Times New Roman', serif", boxSizing: "border-box" }}>
+                    <strong>🧭 HOW TO PLAY</strong>
+                    <div style={{ marginTop: 8, lineHeight: 1.65, fontSize: 14 }}>
+                      🔎 Read the question and find its answer in the grid.<br />
+                      🎯 Words can go across, down, or diagonally — forwards or backwards.<br />
+                      ⌨️ W = Up &nbsp; A = Left &nbsp; S = Down &nbsp; D = Right<br />
+                      ✨ Press SPACE on the first letter, move across the word, then press SPACE again.<br />
+                      💡 Use the hint if you need help.<br />
+                      🏆 Find the hidden word to complete the challenge.
+                    </div>
+                  </div>
+                  <div style={{ width: "min(100%, 620px)", margin: "0 auto 14px", padding: "16px 18px", borderRadius: 16, background: "rgba(255,248,225,0.94)", border: "1px solid rgba(90,60,35,0.2)", fontFamily: "Georgia, 'Times New Roman', serif", textAlign: "center", boxSizing: "border-box" }}>
+                    <div style={{ fontWeight: 800, marginBottom: 7 }}>Question {aurangabadWordQuestion + 1} of {AURANGABAD_WORD_PUZZLE.length}</div>
+                    <div style={{ lineHeight: 1.5 }}>{AURANGABAD_WORD_PUZZLE[aurangabadWordQuestion].question}</div>
+                    {aurangabadHint > 0 && <div style={{ marginTop: 10, fontWeight: 800 }}>💡 Hint: {AURANGABAD_WORD_PUZZLE[aurangabadWordQuestion].hint}</div>}
+                    <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
+                      <button onClick={() => setAurangabadHint(1)} disabled={aurangabadHint >= 1} style={{ border: "none", borderRadius: 10, padding: "9px 14px", background: "#8b633d", color: "#fff8e1", fontWeight: 700, cursor: aurangabadHint >= 1 ? "not-allowed" : "pointer", opacity: aurangabadHint >= 1 ? 0.55 : 1 }}>💡 Hint</button>
+                      <span style={{ padding: "9px 12px", borderRadius: 10, background: "rgba(123,75,53,0.1)", fontWeight: 700 }}>Found: {aurangabadFoundWords.length} / 1</span>
+                    </div>
+                  </div>
+                  <div tabIndex={0} autoFocus onKeyDown={(event) => {
+                    if (!aurangabadWordGrid.length || aurangabadPuzzleComplete) return;
+                    const key = event.key.toLowerCase();
+                    if (!["w", "a", "s", "d", " ", "spacebar"].includes(key)) return;
+                    event.preventDefault();
+                    let [r, c] = aurangabadCursor;
+                    if (key === "w") r = Math.max(0, r - 1);
+                    if (key === "s") r = Math.min(AURANGABAD_WORD_GRID_SIZE - 1, r + 1);
+                    if (key === "a") c = Math.max(0, c - 1);
+                    if (key === "d") c = Math.min(AURANGABAD_WORD_GRID_SIZE - 1, c + 1);
+                    if (key === " ") {
+                      if (!aurangabadSelecting) {
+                        setAurangabadSelectionStart([r, c]); setAurangabadSelection([[r, c]]); setAurangabadSelecting(true);
+                      } else {
+                        const placementIndex = aurangabadWordPlacements.findIndex((placement, index) => {
+                          if (aurangabadFoundWords.includes(index)) return false;
+                          return placement.cells.length === aurangabadSelection.length && placement.cells.every(([pr, pc], i) => pr === aurangabadSelection[i][0] && pc === aurangabadSelection[i][1]);
+                        });
+                        if (placementIndex >= 0) {
+                          const nextFound = [...aurangabadFoundWords, placementIndex];
+                          setAurangabadFoundWords(nextFound); setAurangabadSelectionStart(null); setAurangabadSelection([]); setAurangabadSelecting(false); setAurangabadHint(0);
+                          if (nextFound.length === AURANGABAD_WORD_PUZZLE.length) {
+                            setAurangabadPuzzleComplete(true); awardJourneyXP("Aurangabad", "pieceOfPast", 5, 5);
+                          } else setAurangabadWordQuestion((q) => q + 1);
+                        } else {
+                          setAurangabadSelectionStart(null); setAurangabadSelection([]); setAurangabadSelecting(false);
+                        }
+                      }
+                      return;
+                    }
+                    setAurangabadCursor([r, c]);
+                    if (aurangabadSelecting && aurangabadSelectionStart) {
+                      const [sr, sc] = aurangabadSelectionStart;
+                      const dr = Math.sign(r - sr);
+                      const dc = Math.sign(c - sc);
+                      const straight = (r === sr || c === sc || Math.abs(r - sr) === Math.abs(c - sc));
+                      if (straight) {
+                        const steps = Math.max(Math.abs(r - sr), Math.abs(c - sc));
+                        const path = Array.from({ length: steps + 1 }, (_, i) => [sr + dr * i, sc + dc * i] as [number, number]);
+                        setAurangabadSelection(path);
+                      }
+                    }
+                  }} style={{ outline: "none" }}>
+                    <div style={{ width: "min(560px, 92vw)", maxWidth: 560, margin: "0 auto", padding: 7, borderRadius: 18, background: "#3b281c", boxShadow: "0 14px 35px rgba(70,45,25,0.28)", boxSizing: "border-box" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: `repeat(${AURANGABAD_WORD_GRID_SIZE}, 1fr)`, gap: 2, background: "#6f5035", padding: 4, borderRadius: 13 }}>
+                        {aurangabadWordGrid.flatMap((row) => row).map((cell) => {
+                          const key = `${cell.row}-${cell.col}`;
+                          const cursor = aurangabadCursor[0] === cell.row && aurangabadCursor[1] === cell.col;
+                          const selected = aurangabadSelection.some(([r, c]) => r === cell.row && c === cell.col);
+                          const found = aurangabadFoundWords.some((index) => aurangabadWordPlacements[index]?.cells.some(([r, c]) => r === cell.row && c === cell.col));
+                          return <div key={key} style={{ aspectRatio: "1 / 1", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 4, background: found ? "#d7b76a" : selected ? "#b98a45" : cursor ? "#ead9aa" : "#fff8e1", color: "#4b2e20", fontWeight: 900, fontSize: "clamp(10px, 2.7vw, 20px)", boxShadow: cursor ? "inset 0 0 0 3px #7b4b35" : "none", userSelect: "none" }}>{cell.letter}</div>;
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ textAlign: "center", marginTop: 14, fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 800, color: "#7b4b35" }}>WASD = Move &nbsp; | &nbsp; SPACE = Start / Finish</div>
+                  <div style={{ textAlign: "center", marginTop: 10, color: "#68482f", fontFamily: "Georgia, 'Times New Roman', serif" }}>🏆 Game XP: {getGameXP("Aurangabad", "pieceOfPast")} / 5</div>
+                </div>
+              ) : (
+                <div style={{ maxWidth: 760, margin: "0 auto", padding: "35px 20px 50px", textAlign: "center", color: "#5a3525" }}>
+                  <div style={{ fontSize: 64 }}>🎉</div>
+                  <p className="welcome-small">✦ PIECE OF THE PAST COMPLETE ✦</p>
+                  <h2 style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>Aurangabad Word Hunt Complete!</h2>
+                  <p style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700 }}>You found the hidden word from Aurangabad! 🎊</p>
+                  <p style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700 }}>🏆 Game XP: {getGameXP("Aurangabad", "pieceOfPast")} / 5 &nbsp; • &nbsp; Overall XP: {overallJourneyXP} / {MAX_JOURNEY_XP}</p>
+                  <div style={{ maxWidth: 620, margin: "20px auto", padding: "18px 20px", borderRadius: 16, background: "rgba(255,248,225,0.94)", border: "1px solid rgba(90,60,35,0.2)", textAlign: "left", fontFamily: "Georgia, 'Times New Roman', serif", lineHeight: 1.6 }}>
+                    <strong>✦ Aurangabad discoveries</strong>
+                    {AURANGABAD_WORD_PUZZLE.map((entry, index) => <p key={`${entry.answer}-${index}`} style={{ margin: "8px 0" }}>✦ {entry.answer}</p>)}
+                  </div>
+                  <button onClick={() => nextScreen("activities")} style={{ border: "none", borderRadius: 12, padding: "12px 22px", background: "#7b4b35", color: "#fff8e1", fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, cursor: "pointer" }}>← BACK TO AURANGABAD</button>
+                </div>
+              )
+
+            ) : selectedPlace === "Bhubaneswar" ? (
               !bhubaneswarPuzzleComplete ? (
                 <div style={{ width: "100%", maxWidth: 1180, margin: "0 auto", padding: "18px 12px 45px", color: "#5a3525", boxSizing: "border-box" }}>
                   <div className="profile-top"><button className="profile-button" onClick={() => nextScreen("activities")}>← BACK</button></div>
@@ -5033,6 +5532,30 @@ export default function Home() {
                     <p>✦ You matched all 6 Bhubaneswar cultural and heritage connections.</p>
                     <p>✦ You discovered Lingaraj Temple, Konark Sun Temple, Dhauli Shanti Stupa, Odissi, Rath Yatra and Khandagiri and Udayagiri Caves.</p>
                     <p>✦ Bhubaneswar's heritage reflects the rich history and culture of Odisha.</p>
+                  </>
+                ) : selectedPlace === "Mumbai" ? (
+                  <>
+                    <p>✦ You explored Mumbai's Gateway of India, Marine Drive, CSMT, Ganesh Chaturthi, Bollywood and Marathi heritage.</p>
+                    <br />
+                    ✦ Your Mumbai history and culture knowledge just levelled up!
+                  </>
+                ) : selectedPlace === "Mumbai" ? (
+                  <>
+                    <p>✦ You matched all 6 Mumbai cultural and heritage connections.</p>
+                    <p>✦ You discovered Gateway of India, Marine Drive, CSMT, Ganesh Chaturthi, Bollywood and Chhatrapati Shivaji Maharaj.</p>
+                    <p>✦ Mumbai's heritage reflects its rich history and vibrant culture.</p>
+                  </>
+                ) : selectedPlace === "Aurangabad" ? (
+                  <>
+                    <p>✦ You matched all 10 Aurangabad cultural and heritage connections.</p>
+                    <p>✦ You discovered Bibi Ka Maqbara, Ajanta Caves, Ellora Caves, Daulatabad Fort and Panchakki.</p>
+                    <p>✦ You also explored Aurangzeb, Naan Qalia, Paithani, Chhatrapati Sambhajinagar and Ghrishneshwar Temple.</p>
+                  </>
+                ) : selectedPlace === "Ahmedabad" ? (
+                  <>
+                    <p>✦ You matched all 10 Ahmedabad cultural and heritage connections.</p>
+                    <p>✦ You discovered Sabarmati Ashram, Sidi Saiyyed Mosque, Adalaj Stepwell and the Sabarmati River.</p>
+                    <p>✦ You also explored Dhokla, Kankaria Lake, Sultan Ahmed Shah, Navratri, Sardar Vallabhbhai Patel and Undhiyu.</p>
                   </>
                 ) : (
                   <>
